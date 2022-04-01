@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] float Speed = 3f;
+    [SerializeField] float SpeedMultiplier = 1.05f;
     GameManager gameManager;
     
     [HideInInspector]
@@ -19,7 +20,7 @@ public class Ball : MonoBehaviour
         isBallMoving = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (gameManager.isGameActive && !IsBallMoving())
         {        
@@ -71,7 +72,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Paddle"))
         {
-            rb.velocity *= 1.05f;
+            rb.velocity *= SpeedMultiplier;
             gameManager.UseSound("pingSound");
         }
     }

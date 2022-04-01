@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     // GameObjects prefabs
     [SerializeField] GameObject[] blockPrefabs;
     [SerializeField] GameObject player;
@@ -61,6 +64,14 @@ public class GameManager : MonoBehaviour
     public bool isPositionReset;
     float blockXBound = 5.0f;
     float blockYBound = 2.5f;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     
 
     void Start()
@@ -68,12 +79,16 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         ballScript = ball.GetComponent<Ball>();
         isGameActive = true;
+        Profiler.BeginSample("Using Music");
         UseSound("bgMusic");
+        Profiler.EndSample();
 
+        Profiler.BeginSample("Getting Initial Positions");
         playerInitialPos = player.transform.position;
         playerInitialRotation = player.transform.rotation;
         AIEnemyInitialPos = AIEnemy.transform.position;
         ballInitialPos = ball.transform.position;
+        Profiler.EndSample();
 
         InvokeRepeating("SpawnBlocks", 2f, 5f);
         
@@ -95,8 +110,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        Profiler.BeginSample("Checking Score");
         CheckScore();
+        Profiler.EndSample();
+
+        Profiler.BeginSample("Toggling Menu");
         ToggleMenu();
+        Profiler.EndSample();
     }
 
     public void GameOver()
@@ -149,7 +169,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddScore(string addTo, int amount)
-    {   
+    {
         if (addTo == "playerOne")
         {
             int score = Int32.Parse(playerOneScore.text);

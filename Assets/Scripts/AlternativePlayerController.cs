@@ -70,6 +70,14 @@ public class AlternativePlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("ObjectToDestroy"))
         {
             Destroy(other.gameObject);
+
+            string tag = other.gameObject.GetComponent<ObjectToDestroy>().Tag;
+            switch (tag)
+            {
+                case "SpeedBonus":
+                    BonusManager.Instance.SpeedBonus();
+                    break;
+            }
         }
     }
 }

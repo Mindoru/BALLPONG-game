@@ -292,6 +292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 0}
-  playerSpeed: 7
-  bonusTime: 7
-  playerHasBonus: 0
+  Speed: 7
+  BonusTime: 7
+  HasBonus: 0

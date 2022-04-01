@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class PlayerController : MonoBehaviour
 {
     // GameObjects
-    [SerializeField] GameObject bulletPrefab;
+    // [SerializeField] GameObject bulletPrefab;
     
     // Scripts
     GameManager gameManager;
@@ -15,10 +16,10 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     
     // Valores por defecto
-    [SerializeField] float Speed = 7f;
-    [SerializeField] float BonusTime = 7f;
+    // [SerializeField] float BonusTime = 7f;
+    public float Speed = 7f;
     bool isDodging;
-    public bool HasBonus;
+    // public bool HasBonus;
 
     void Start()
     {
@@ -36,9 +37,15 @@ public class PlayerController : MonoBehaviour
         if (gameManager.isGameActive)
         {
             HandleMovement();
+            Profiler.BeginSample("Handling Dodge");
             HandleDodge();
-            HandleFire();
-            HandleBonus();
+            Profiler.EndSample();
+            // Profiler.BeginSample("Handling Fire");
+            // HandleFire();
+            // Profiler.EndSample();
+            // Profiler.BeginSample("Handling Bonus");
+            // HandleBonus();
+            // Profiler.EndSample();
         }
     }
 
@@ -74,37 +81,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleFire()
-    {
-        if (HasBonus && !isDodging)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                StartCoroutine(Fire());
-            }
-        }
-    }
+    // void HandleFire()
+    // {
+    //     if (HasBonus && !isDodging)
+    //     {
+    //         if (Input.GetKeyDown(KeyCode.E))
+    //         {
+    //             StartCoroutine(Fire());
+    //         }
+    //     }
+    // }
 
-    void HandleBonus()
-    {
-        if (HasBonus)
-        {
-            StartCoroutine(DeleteBonus());
-        }
-    }
+    // void HandleBonus()
+    // {
+    //     if (HasBonus)
+    //     {
+    //         StartCoroutine(RemoveBonus());
+    //     }
+    // }
 
-    IEnumerator Fire()
-    {
-        Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
-        yield return new WaitForSeconds(0.30f);
-    }
+    // IEnumerator Fire()
+    // {
+    //     Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+    //     yield return new WaitForSeconds(0.30f);
+    // }
 
-    IEnumerator DeleteBonus()
-    {
-        yield return new WaitForSeconds(BonusTime);
-        HasBonus = false;
-        #if UNITY_EDITOR
-            Debug.Log("El jugador no tiene más el Bonus.");
-        #endif
-    }
+    // IEnumerator RemoveBonus()
+    // {
+    //     yield return new WaitForSeconds(BonusTime);
+    //     HasBonus = false;
+    //     #if UNITY_EDITOR
+    //         Debug.Log("El jugador no tiene más el Bonus.");
+    //     #endif
+    // }
 }

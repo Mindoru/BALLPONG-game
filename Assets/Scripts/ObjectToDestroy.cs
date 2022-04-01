@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectToDestroy : MonoBehaviour
 {
+    public string Tag;
     [SerializeField] float secondsForDestroy = 5.0f;
     [SerializeField] float animTime = 1f;
     GameManager gameManager;

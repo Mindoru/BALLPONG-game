@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae118d892130e3c49b19488a5749e069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tag: SpeedBonus
   secondsForDestroy: 5
   animTime: 1
 --- !u!95 &7419286861916331646
