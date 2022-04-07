@@ -8,8 +8,8 @@ TagManager:
   - Paddle
   - Sensor
   - Ball
-  - ObjectToDestroy
   - AlternativePlayer
+  - Powerup
   layers:
   - Default
   - TransparentFX

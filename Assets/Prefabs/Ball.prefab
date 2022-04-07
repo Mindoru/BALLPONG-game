@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  SpeedMultiplier: 1.05
   isBallMoving: 0
 --- !u!58 &1629129588704779357
 CircleCollider2D:

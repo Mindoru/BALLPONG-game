@@ -5,7 +5,9 @@ using UnityEngine;
 public class BonusManager : MonoBehaviour
 {
     public static BonusManager Instance;
+
     [SerializeField] PlayerController Player;
+    [SerializeField] float PlayerSpeedBonus = 3f;
     Dictionary<string, bool> hasBonus = new Dictionary<string, bool>();
     Dictionary<string, float> bonusTime = new Dictionary<string, float>()
     {
@@ -32,7 +34,7 @@ public class BonusManager : MonoBehaviour
     {
         if (!hasBonus.ContainsKey("speed"))
         {
-            Player.Speed += 6;
+            Player.Speed += PlayerSpeedBonus;
             hasBonus.Add("speed", true);
             StartCoroutine(RemoveSpeedBonus());
         }
@@ -41,7 +43,7 @@ public class BonusManager : MonoBehaviour
     IEnumerator RemoveSpeedBonus()
     {
         yield return new WaitForSeconds(bonusTime["speed"]);
-        Player.Speed -= 6;
+        Player.Speed -= PlayerSpeedBonus;
         hasBonus.Remove("speed");
     }
 }

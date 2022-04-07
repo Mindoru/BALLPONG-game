@@ -2,27 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectToDestroy : MonoBehaviour
+public class Powerup : MonoBehaviour
 {
     public string Tag;
     [SerializeField] float secondsForDestroy = 5.0f;
     [SerializeField] float animTime = 1f;
-    GameManager gameManager;
     Animator anim;
 
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
         StartCoroutine(DestroyAfterSeconds(secondsForDestroy));
     }
 
     void Update()
     {
-        if (gameManager.isPositionReset)
+        if (GameManager.Instance.isPositionReset)
         {
             Destroy(gameObject);
-            gameManager.SetIsPositionReset(false);
+            GameManager.Instance.isPositionReset = false;
         }
     }
 
@@ -30,12 +28,7 @@ public class ObjectToDestroy : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds - animTime);
         anim.SetBool("isDestroying_b", true);
-        yield return new WaitForSeconds(animTime);
-
-        if (gameManager.isGameActive)
-        {
-            gameManager.AddScore("playerTwo", 1);
-            gameManager.ResetPosition();
-        }
+        yield return new WaitForSeconds(animTime - (10 * animTime / 100)); // Espera a que la animación esté al 90%
+        Destroy(gameObject);
     }
 }

@@ -8,10 +8,6 @@ public class PlayerController : MonoBehaviour
     // GameObjects
     // [SerializeField] GameObject bulletPrefab;
     
-    // Scripts
-    GameManager gameManager;
-    Ball ballScript;
-    
     // Componentes
     Animator anim;
     
@@ -23,10 +19,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        ballScript = GameObject.Find("Ball").GetComponent<Ball>();
-        
-        if (gameManager.isSetEnemyIncomingUI())
+        if (GameManager.Instance.EnemyIncomingUI)
         {
             anim = GetComponentInChildren<Animator>();
         }
@@ -34,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.isGameActive)
+        if (GameManager.Instance.isGameActive)
         {
             HandleMovement();
             Profiler.BeginSample("Handling Dodge");
@@ -65,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if (anim != null)
         {
-            if (gameManager.enemyIncoming)
+            if (GameManager.Instance.enemyIncoming)
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {

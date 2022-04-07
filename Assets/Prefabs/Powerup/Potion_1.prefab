@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7419286861916331646}
   m_Layer: 0
   m_Name: Potion_1
-  m_TagString: ObjectToDestroy
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

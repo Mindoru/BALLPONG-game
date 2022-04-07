@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public static Ball Instance;
+
     [SerializeField] float Speed = 3f;
     [SerializeField] float SpeedMultiplier = 1.05f;
-    GameManager gameManager;
     
     [HideInInspector]
     public bool isBallMoving;
 
     Rigidbody2D rb;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         isBallMoving = false;
     }
 
     void Update()
     {
-        if (gameManager.isGameActive && !IsBallMoving())
+        if (GameManager.Instance.isGameActive && !IsBallMoving())
         {        
             if (Input.GetKeyDown(KeyCode.V))
             {
@@ -54,15 +62,15 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Goal"))
         {
-            gameManager.ResetPosition();
+            GameManager.Instance.ResetPosition();
             if (collision.gameObject.name == "Left Goal")
             {
-                gameManager.AddScore("playerTwo", 1);
+                GameManager.Instance.AddScore("playerTwo", 1);
                 return;
             }
             else if (collision.gameObject.name == "Right Goal")
             {
-                gameManager.AddScore("playerOne", 1);
+                GameManager.Instance.AddScore("playerOne", 1);
                 return;
             }
         }
@@ -73,7 +81,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Paddle"))
         {
             rb.velocity *= SpeedMultiplier;
-            gameManager.UseSound("pingSound");
+            GameManager.Instance.UseSound("pingSound");
         }
     }
 }

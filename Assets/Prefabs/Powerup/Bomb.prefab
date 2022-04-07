@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 724326683066014843}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: ObjectToDestroy
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae118d892130e3c49b19488a5749e069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tag: 
   secondsForDestroy: 3
   animTime: 1
 --- !u!95 &724326683066014843

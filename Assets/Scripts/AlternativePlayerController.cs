@@ -5,22 +5,18 @@ using UnityEngine;
 public class AlternativePlayerController : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1.0f;
-    Ball ballScript;
     Rigidbody2D rb;
-    GameManager gameManager;
     float xBound = 8.25f;
 
     void Start()
     {
-        ballScript = GameObject.Find("Ball").GetComponent<Ball>();
         rb = GetComponent<Rigidbody2D>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void FixedUpdate()
     {
         
-        if (gameManager.isGameActive && ballScript.IsBallMoving())
+        if (GameManager.Instance.isGameActive && Ball.Instance.IsBallMoving())
         {
             MovePlayer();
         }
@@ -67,11 +63,11 @@ public class AlternativePlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("ObjectToDestroy"))
+        if (other.gameObject.CompareTag("Powerup"))
         {
             Destroy(other.gameObject);
 
-            string tag = other.gameObject.GetComponent<ObjectToDestroy>().Tag;
+            string tag = other.gameObject.GetComponent<Powerup>().Tag;
             switch (tag)
             {
                 case "SpeedBonus":

@@ -5,12 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float Speed = 15f;
-    GameManager gameManager;
-    
-    void Start()
-    {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-    }
 
     void Update()
     {
@@ -21,11 +15,11 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Paddle") || other.gameObject.CompareTag("AlternativePlayer"))
         {
             Destroy(other.gameObject);
-            gameManager.GameOver();
+            GameManager.Instance.GameOver();
         }
         else if (other.gameObject.CompareTag("Sensor"))
         {
-            gameManager.SetEnemyIncoming(false);
+            GameManager.Instance.enemyIncoming = false;
         }
     }
 }
