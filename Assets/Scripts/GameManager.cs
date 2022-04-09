@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     // Interfaz gráfica
     [SerializeField] GameObject noMenuUI;
     [SerializeField] GameObject menuUIIncludingOptions;
+    public GameObject MenuUI { get => menuUIIncludingOptions; }
     [SerializeField] GameObject scoreUI;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] TextMeshProUGUI playerOneScoreText;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
     public int playerOneScore = 0;
     public int playerTwoScore = 0;
     public int maxScore = 3;
+    public bool levelPassed = false;
+    public bool canPause = true;
     bool isGamePaused;
     public bool isGameActive = true;
     public bool enemyIncoming;
@@ -66,7 +69,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        // isGameActive = true;
         
         Profiler.BeginSample("Using Music");
         UseSound("bgMusic");
@@ -144,10 +146,10 @@ public class GameManager : MonoBehaviour
         {
             Dictionary<string, float> helpTimes = new Dictionary<string, float>()
             {
-                { "startFrom", 15f },
-                { "startTo", 20f },
-                { "rateFrom", 10f },
-                { "rateTo", 20f }
+                { "startFrom", 20f },
+                { "startTo", 30f },
+                { "rateFrom", 40f },
+                { "rateTo", 90f }
             };
             float[] helpRandTimes = {
                 Random.Range(helpTimes["startFrom"], helpTimes["startTo"]),
@@ -203,7 +205,7 @@ public class GameManager : MonoBehaviour
     {
         if (menuUIIncludingOptions != null && noMenuUI != null)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && canPause)
             {
                 if (isGamePaused)
                 {
@@ -244,7 +246,7 @@ public class GameManager : MonoBehaviour
             if (playerOneScore >= maxScore)
             {
                 // TODO: Mostrar opciones para pasar al siguiente nivel, seleccionar nivel o ir al menú principal
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                levelPassed = true;
             }
             else if (playerTwoScore >= maxScore)
             {
