@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float Speed = 30f;
+    [Tooltip("Bullet speed. Recommended value is 0.75")]
+    [SerializeField] float Speed = 0.75f;
     Rigidbody2D rb;
 
     void Start()
@@ -14,20 +15,19 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(Vector2.right * Speed);
+        rb.AddForce(Vector2.right * Speed, ForceMode2D.Impulse);
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("ObjectToDestroy"))
-        {
-            Destroy(other.gameObject);
-        }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        GameManager.Instance.GoalTriggerEnter(other, true);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.GetComponent<AIEnemy>())
+        if (other.gameObject.name != "Player Animation" && !other.gameObject.CompareTag("AlternativePlayer"))
         {
-            Destroy(gameObject);
+            Debug.Log("La bala colisionó con algo que no es Player");
+            SimplePool.Despawn(gameObject);
         }
     }
 }

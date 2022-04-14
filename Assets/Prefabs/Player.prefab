@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1184333796}
   - component: {fileID: 1184333794}
   m_Layer: 0
-  m_Name: Animation
+  m_Name: Player Animation
   m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

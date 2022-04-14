@@ -5,24 +5,16 @@ using UnityEngine.Profiling;
 
 public class PlayerController : MonoBehaviour
 {
-    // GameObjects
-    // [SerializeField] GameObject bulletPrefab;
-    
     // Componentes
     Animator anim;
     
     // Valores por defecto
-    // [SerializeField] float BonusTime = 7f;
     public float Speed = 7f;
     bool isDodging;
-    // public bool HasBonus;
 
     void Start()
     {
-        if (GameManager.Instance.EnemyIncomingUI)
-        {
-            anim = GetComponentInChildren<Animator>();
-        }
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -33,12 +25,6 @@ public class PlayerController : MonoBehaviour
             Profiler.BeginSample("Handling Dodge");
             HandleDodge();
             Profiler.EndSample();
-            // Profiler.BeginSample("Handling Fire");
-            // HandleFire();
-            // Profiler.EndSample();
-            // Profiler.BeginSample("Handling Bonus");
-            // HandleBonus();
-            // Profiler.EndSample();
         }
     }
 
@@ -66,45 +52,11 @@ public class PlayerController : MonoBehaviour
                     anim.SetBool("isDodge_b", !anim.GetBool("isDodge_b"));
                 }
             }
-            else
+            else if (isDodging && !GameManager.Instance.enemyIncoming) // No uso un else {} para poder togglear la animación desde el editor
             {
                 isDodging = false;
                 anim.SetBool("isDodge_b", false);
             }
         }
     }
-
-    // void HandleFire()
-    // {
-    //     if (HasBonus && !isDodging)
-    //     {
-    //         if (Input.GetKeyDown(KeyCode.E))
-    //         {
-    //             StartCoroutine(Fire());
-    //         }
-    //     }
-    // }
-
-    // void HandleBonus()
-    // {
-    //     if (HasBonus)
-    //     {
-    //         StartCoroutine(RemoveBonus());
-    //     }
-    // }
-
-    // IEnumerator Fire()
-    // {
-    //     Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
-    //     yield return new WaitForSeconds(0.30f);
-    // }
-
-    // IEnumerator RemoveBonus()
-    // {
-    //     yield return new WaitForSeconds(BonusTime);
-    //     HasBonus = false;
-    //     #if UNITY_EDITOR
-    //         Debug.Log("El jugador no tiene más el Bonus.");
-    //     #endif
-    // }
 }

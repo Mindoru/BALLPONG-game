@@ -58,27 +58,14 @@ public class Ball : MonoBehaviour
         return isBallMoving;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            GameManager.Instance.ResetPosition();
-            if (collision.gameObject.name == "Left Goal")
-            {
-                GameManager.Instance.AddScore("playerTwo", 1);
-                return;
-            }
-            else if (collision.gameObject.name == "Right Goal")
-            {
-                GameManager.Instance.AddScore("playerOne", 1);
-                return;
-            }
-        }
+        GameManager.Instance.GoalTriggerEnter(other);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Paddle"))
+        if (other.gameObject.CompareTag("Paddle"))
         {
             rb.velocity *= SpeedMultiplier;
             GameManager.Instance.UseSound("pingSound");

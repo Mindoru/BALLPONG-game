@@ -303,6 +303,8 @@ public class GameManager : MonoBehaviour
         AIEnemy.transform.position = AIEnemyInitialPos;
         ball.transform.position = ballInitialPos;
         Ball.Instance.StopBall();
+        PowerupManager.hasPowerup.Remove("shoot");
+        AlternativePlayerController.shootPowerup = false;
     }
     public void PauseGame()
     {
@@ -320,6 +322,28 @@ public class GameManager : MonoBehaviour
         noMenuUI.SetActive(true);
         menuUIIncludingOptions.SetActive(false);
         isGamePaused = false;
+    }
+
+    public void GoalTriggerEnter(Collider2D other, bool isBullet = false)
+    {
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            GameManager.Instance.ResetPosition();
+            if (!isBullet)
+            {
+                if (other.gameObject.name == "Left Goal")
+                {
+                    GameManager.Instance.AddScore("playerTwo", 1);
+                    return;
+                }
+            }
+            
+            if (other.gameObject.name == "Right Goal")
+            {
+                GameManager.Instance.AddScore("playerOne", 1);
+                return;
+            }
+        }
     }
 
     IEnumerator HideEnemyIncomingText()

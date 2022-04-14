@@ -15,15 +15,6 @@ public class Powerup : MonoBehaviour
         StartCoroutine(DestroyAfterSeconds(secondsForDestroy));
     }
 
-    void Update()
-    {
-        if (GameManager.Instance.isPositionReset)
-        {
-            Destroy(gameObject);
-            GameManager.Instance.isPositionReset = false;
-        }
-    }
-
     IEnumerator DestroyAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds - animTime);

@@ -7,6 +7,7 @@ public class AlternativePlayerController : MonoBehaviour
     [SerializeField] float movementSpeed = 1.0f;
     Rigidbody2D rb;
     float xBound = 8.25f;
+    public static bool shootPowerup = false;
 
     void Start()
     {
@@ -21,6 +22,14 @@ public class AlternativePlayerController : MonoBehaviour
             MovePlayer();
         }
         LimitBounds();
+    }
+
+    void Update()
+    {
+        if (shootPowerup)
+        {
+            PowerupManager.Instance.ShootPowerup();
+        }
     }
 
     void MovePlayer()
@@ -70,8 +79,11 @@ public class AlternativePlayerController : MonoBehaviour
             string tag = other.gameObject.GetComponent<Powerup>().Tag;
             switch (tag)
             {
-                case "SpeedBonus":
-                    BonusManager.Instance.SpeedBonus();
+                case "SpeedPowerup":
+                    PowerupManager.Instance.SpeedPowerup();
+                    break;
+                case "ShootPowerup":
+                    shootPowerup = true;
                     break;
             }
         }
