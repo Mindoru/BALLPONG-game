@@ -44,4 +44,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  PlayerSpeedPowerup: 3
+  speedAmount: 3
+  speedTimeLimit: 2.5
+  scaleTime: 0.5
+  scaleAmount: 0.35
+  scaleTimeLimit: 4
+  shootRate: 2
+  shootTimeLimit: 3
+  bulletPrefab: {fileID: 0}
+  bulletPoolSize: 5
+  bulletPool: []

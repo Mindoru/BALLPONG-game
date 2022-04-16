@@ -896,6 +896,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7198309724950766958}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: scaleTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: shootRate
       value: 2
       objectReference: {fileID: 0}
@@ -907,6 +911,10 @@ PrefabInstance:
       propertyPath: bulletPoolSize
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: PlayerAnimation
+      value: 
+      objectReference: {fileID: 7198309724950766959}
     - target: {fileID: 8293804948225514341, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -957,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 7198309724950766958}
     - target: {fileID: 8293804948225514363, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: m_Name
-      value: BonusManager
+      value: PowerManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80c09484583b57243a800f4780928896, type: 3}
@@ -1947,6 +1955,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d468ccf32c8e57049bc05795264340bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7198309724950766959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5913349467356481989, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+  m_PrefabInstance: {fileID: 7198309724950766956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8316148505017887796
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AlternativePlayerController : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 1.0f;
+    [SerializeField] float movementSpeed = 3f;
     Rigidbody2D rb;
     float xBound = 8.25f;
     public static bool shootPowerup = false;
@@ -54,7 +54,7 @@ public class AlternativePlayerController : MonoBehaviour
 
     void Move(Vector2 force)
     {
-        rb.AddForce(force * movementSpeed, ForceMode2D.Force);
+        rb.AddForce(force * movementSpeed, ForceMode2D.Impulse);
     }
 
     void LimitBounds()
@@ -81,6 +81,9 @@ public class AlternativePlayerController : MonoBehaviour
             {
                 case "SpeedPowerup":
                     PowerupManager.Instance.SpeedPowerup();
+                    break;
+                case "GrowPowerup":
+                    PowerupManager.Instance.GrowPowerup();
                     break;
                 case "ShootPowerup":
                     shootPowerup = true;
