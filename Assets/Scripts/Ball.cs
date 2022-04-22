@@ -44,6 +44,8 @@ public class Ball : MonoBehaviour
         float xVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
         float yVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
         rb.velocity = new Vector2(xVelocity * Speed, yVelocity * Speed);
+        var impulse = (360f * Mathf.Deg2Rad) * rb.inertia;
+        rb.AddTorque(impulse, ForceMode2D.Impulse);
     }
 
     public void StopBall()

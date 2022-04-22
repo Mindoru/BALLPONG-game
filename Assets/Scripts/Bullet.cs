@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
     [Tooltip("Bullet speed. Recommended value is 10")]
     [SerializeField] float Speed = 10f;
     Rigidbody2D rb;
-    string playerCollisionName = "Player Animation";
 
     void Start()
     {
@@ -33,8 +32,9 @@ public class Bullet : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        var validCollision = other.gameObject.name != playerCollisionName && !other.gameObject.CompareTag("Wall");
-        if (validCollision || other.gameObject.CompareTag("Goal") || other.gameObject.CompareTag("AlternativePlayer"))
+        GameObject otherObj = other.gameObject;
+        var validCollision = otherObj.GetComponent<PlayerController>() == null && !otherObj.CompareTag("Wall") || otherObj.CompareTag("Goal") || otherObj.CompareTag("AlternativePlayer");
+        if (validCollision)
         {
             Debug.Log("La bala colisionó con algo que no es Player");
             SimplePool.Despawn(gameObject);

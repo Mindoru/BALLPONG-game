@@ -7,24 +7,33 @@ public class PlayerController : MonoBehaviour
 {
     // Componentes
     Animator anim;
+    Rigidbody2D rb;
     
     // Valores por defecto
-    public float Speed = 7f;
+    public float Speed = 15f;
     bool isDodging;
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (GameManager.Instance.isGameActive)
         {
-            HandleMovement();
             Profiler.BeginSample("Handling Dodge");
             HandleDodge();
             Profiler.EndSample();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (GameManager.Instance.isGameActive)
+        {
+            HandleMovement();
         }
     }
 
@@ -32,11 +41,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector2.up * Time.deltaTime * Speed);
+            Debug.Log("Yendo hacia arriba");
+            rb.AddForce(Vector2.up * Speed, ForceMode2D.Impulse);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector2.down * Time.deltaTime * Speed);
+            Debug.Log("Yendo hacia abajo");
+            rb.AddForce(Vector2.down * Speed, ForceMode2D.Impulse);
         }
     }
 

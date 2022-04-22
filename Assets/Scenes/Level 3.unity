@@ -160,6 +160,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 337545709993060953, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
   m_PrefabInstance: {fileID: 2453029876891148638}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &275427270 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6817037771842841319, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+  m_PrefabInstance: {fileID: 7198309724950766956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &309223118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,6 +1949,54 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.020178825
       objectReference: {fileID: 0}
+    - target: {fileID: 4804959740949123795, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179903233078227818, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179903233078227831, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179903233078227831, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179903233078227831, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179903233078227831, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817037771842841319, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817037771842841336, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817037771842841336, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817037771842841336, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817037771842841336, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198309722919495144, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7198309722919495151, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.16
@@ -1966,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7198309723239032472, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7198309723239032472, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2001,6 +2054,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7198309723239032479, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198309723239032479, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: ParticleTop
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198309723239032479, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 4618475100361331010, guid: f221460eae694c148a11a89360407b1d, type: 3}
@@ -2008,7 +2069,8 @@ PrefabInstance:
       propertyPath: playerHasBonus
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1184333795, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
 --- !u!1 &7198309724950766957 stripped
 GameObject:
@@ -2026,6 +2088,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d468ccf32c8e57049bc05795264340bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &7198309724950766961
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7198309724950766957}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 20
+  m_LinearDrag: 5
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1001 &8293804947488696533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2046,6 +2129,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: ParticleTop
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: speedAmount
       value: 3
       objectReference: {fileID: 0}
@@ -2053,6 +2140,14 @@ PrefabInstance:
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 4618475100361331010, guid: f221460eae694c148a11a89360407b1d, type: 3}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: SpeedParticle
+      value: 
+      objectReference: {fileID: 275427270}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: ParticleBottom
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: bulletPoolSize
       value: 5

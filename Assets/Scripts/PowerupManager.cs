@@ -12,6 +12,7 @@ public class PowerupManager : MonoBehaviour
     [Header("Speed Powerup")]
     [SerializeField] float speedAmount = 3f;
     [SerializeField] float speedTimeLimit = 2.5f;
+    [SerializeField] ParticleSystem SpeedParticle;
 
     [Header("Grow Powerup")]
     [SerializeField] [Tooltip("Grow time in seconds")] float scaleTime = 1f;
@@ -59,6 +60,7 @@ public class PowerupManager : MonoBehaviour
         if (!hasPowerup.ContainsKey("speed"))
         {
             Player.Speed += speedAmount;
+            SpeedParticle.Play();
             hasPowerup.Add("speed", true);
             StartCoroutine(RemoveSpeedPowerup());
         }
@@ -68,6 +70,7 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(speedTimeLimit);
         Player.Speed -= speedAmount;
+        SpeedParticle.Stop();
         hasPowerup.Remove("speed");
     }
 
