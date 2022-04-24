@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +7,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     
     // Valores por defecto
-    public float Speed = 15f;
+    public float Speed = 40f;
     bool isDodging;
 
     void Start()
@@ -23,9 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.isGameActive)
         {
-            Profiler.BeginSample("Handling Dodge");
             HandleDodge();
-            Profiler.EndSample();
         }
     }
 
@@ -41,12 +36,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("Yendo hacia arriba");
             rb.AddForce(Vector2.up * Speed, ForceMode2D.Impulse);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            Debug.Log("Yendo hacia abajo");
             rb.AddForce(Vector2.down * Speed, ForceMode2D.Impulse);
         }
     }

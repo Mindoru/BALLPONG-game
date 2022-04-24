@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  speedAmount: 3
+  PlayerAnimation: {fileID: 0}
+  speedAmount: 15
   speedTimeLimit: 2.5
+  SpeedParticle: {fileID: 0}
   scaleTime: 0.5
   scaleAmount: 0.35
   scaleTimeLimit: 4

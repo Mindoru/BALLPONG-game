@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class Help : MonoBehaviour
 {
     [SerializeField] float upToDownAnimTime = 0.5f;
     [SerializeField] float destroyTime = 1.5f;
-    // PlayerController playerScript;
     Animator anim;
     
     int PointsToAdd;
@@ -16,12 +13,9 @@ public class Help : MonoBehaviour
 
     void Start()
     {
-        // playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         anim = GetComponent<Animator>();
         ShowHelpObject();
-        Profiler.BeginSample("Destroying Bonus Object");
         StartCoroutine(DestroyHelpObject());
-        Profiler.EndSample();
         PointsToAdd = Random.Range(minPointsToAdd, maxPointsToAdd);
     }
 
@@ -37,10 +31,6 @@ public class Help : MonoBehaviour
             GameManager.Instance.AddScore("playerOne", PointsToAdd);
             GameManager.Instance.ResetPosition();
             HideHelpObject();
-            #if UNITY_EDITOR
-                Debug.Log("El jugador obtuvo una ayuda!");
-            #endif
-            // playerScript.HasBonus = true;
         }
     }
 

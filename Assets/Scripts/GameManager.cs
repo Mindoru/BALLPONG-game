@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using TMPro;
@@ -69,16 +67,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
-        Profiler.BeginSample("Using Music");
         UseSound("bgMusic");
-        Profiler.EndSample();
-
         SetScoreTextToScore();
-
-        Profiler.BeginSample("Getting Initial Positions");
         SaveInitialPos();
-        Profiler.EndSample();
         
         HandlePowerup();
         HandleEnemy();
@@ -89,13 +80,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Profiler.BeginSample("Checking Score");
         CheckScore();
-        Profiler.EndSample();
-
-        Profiler.BeginSample("Toggling Menu");
         ToggleMenu();
-        Profiler.EndSample();
     }
 
     void SetScoreTextToScore()

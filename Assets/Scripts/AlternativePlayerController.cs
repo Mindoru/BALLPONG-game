@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AlternativePlayerController : MonoBehaviour
@@ -34,19 +32,19 @@ public class AlternativePlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.I))
         {
             Move(Vector2.up);
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.K))
         {
             Move(Vector2.down);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.J))
         {
             Move(Vector2.left);
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.L))
         {
             Move(Vector2.right);
         }

@@ -49,3 +49,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: No-Light Layer
+    uniqueID: 591259989
+    locked: 0

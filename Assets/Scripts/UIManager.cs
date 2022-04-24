@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +14,6 @@ public class UIManager : MonoBehaviour
     // Variables para el control de volumen
     [Header("Volume settings")]
     [SerializeField] Slider volumeSlider;
-    [SerializeField] float volumeSliderValue;
 
     // Variables para controlar límite de FPS
     [Header("FPS settings")]
@@ -38,7 +36,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         // Volume settings
-        HandleVolume();
+        InitialVolume();
 
         // FPS settings
         HandleFPS();
@@ -47,7 +45,7 @@ public class UIManager : MonoBehaviour
         HandleScreen();
     }
 
-    void HandleVolume()
+    void InitialVolume()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("volumeAudio", 0.5f);
         AudioListener.volume = volumeSlider.value;
@@ -69,7 +67,9 @@ public class UIManager : MonoBehaviour
         bool VSyncPlayerPrefs = PlayerPrefs.GetInt("vsync", 0) > 0 ? true : false;
         SetVSync(VSyncPlayerPrefs);
         vsyncToggle.isOn = VSyncPlayerPrefs;
-        fullScreenToggle.isOn = Screen.fullScreen;
+
+        int fullScreenPrefs = PlayerPrefs.GetInt("fullScreen", Screen.fullScreen ? 1 : 0);
+        fullScreenToggle.isOn = fullScreenPrefs == 1 ? true : false;
         CheckResolution();
     }
 
@@ -91,14 +91,14 @@ public class UIManager : MonoBehaviour
 
     public void ChangeVolume(float value)
     {
-        volumeSliderValue = value;
-        PlayerPrefs.SetFloat("volumeAudio", volumeSliderValue);
+        PlayerPrefs.SetFloat("volumeAudio", value);
         AudioListener.volume = volumeSlider.value;
     }
 
     public void SetFullScreen(bool fullScreen)
     {
         Screen.fullScreen = fullScreen;
+        PlayerPrefs.SetInt("fullScreen", fullScreen ? 1 : 0);
     }
 
     public void SetVSync(bool value)

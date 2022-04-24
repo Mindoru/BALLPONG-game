@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -8,6 +6,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] float Speed = 3f;
     [SerializeField] float SpeedMultiplier = 1.05f;
+    [SerializeField] ParticleSystem BurstParticle;
     
     [HideInInspector]
     public bool isBallMoving;
@@ -50,8 +49,8 @@ public class Ball : MonoBehaviour
 
     public void StopBall()
     {
-        
         rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
     }
 
     public bool IsBallMoving()
@@ -70,6 +69,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("Paddle"))
         {
             rb.velocity *= SpeedMultiplier;
+            BurstParticle.Play();
             GameManager.Instance.UseSound("pingSound");
         }
     }

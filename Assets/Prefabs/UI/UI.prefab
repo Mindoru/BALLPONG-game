@@ -1020,7 +1020,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 8284255373760443204}
-  volumeSliderValue: 0.5
   FPSLimitText: {fileID: 7701668877106345740}
   FPSButtonPrevious: {fileID: 4149549727726007392}
   FPSButtonNext: {fileID: 590211381237167841}

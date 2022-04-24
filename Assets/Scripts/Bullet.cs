@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -36,7 +34,6 @@ public class Bullet : MonoBehaviour
         var validCollision = otherObj.GetComponent<PlayerController>() == null && !otherObj.CompareTag("Wall") || otherObj.CompareTag("Goal") || otherObj.CompareTag("AlternativePlayer");
         if (validCollision)
         {
-            Debug.Log("La bala colisionó con algo que no es Player");
             SimplePool.Despawn(gameObject);
         }
     }
