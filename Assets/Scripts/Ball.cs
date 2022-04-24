@@ -51,6 +51,7 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
+        BurstParticle.Stop();
     }
 
     public bool IsBallMoving()
