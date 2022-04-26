@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: levelEndUI
       value: 
       objectReference: {fileID: 2453029876891148639}
+    - target: {fileID: 4964302241899546001, guid: bf50e967751701e40a18681560cc9b35, type: 3}
+      propertyPath: MainMenuTextBox
+      value: 
+      objectReference: {fileID: 2453029876891148650}
+    - target: {fileID: 4964302241899546001, guid: bf50e967751701e40a18681560cc9b35, type: 3}
+      propertyPath: NextLevelTextBox
+      value: 
+      objectReference: {fileID: 2453029876891148651}
     - target: {fileID: 4964302241899546003, guid: bf50e967751701e40a18681560cc9b35, type: 3}
       propertyPath: m_Name
       value: LevelEndManager
@@ -954,7 +962,7 @@ PrefabInstance:
       objectReference: {fileID: 7198309724950766958}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: scaleTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: shootRate
@@ -965,6 +973,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: speedAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 4618475100361331010, guid: f221460eae694c148a11a89360407b1d, type: 3}
@@ -972,6 +984,14 @@ PrefabInstance:
       propertyPath: SpeedParticle
       value: 
       objectReference: {fileID: 7198309724950766960}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: speedParticle
+      value: 
+      objectReference: {fileID: 7198309724950766960}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: GrowPowerupHud
+      value: 
+      objectReference: {fileID: 2453029876891148653}
     - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: ParticleBottom
       value: 
@@ -984,6 +1004,14 @@ PrefabInstance:
       propertyPath: PlayerAnimation
       value: 
       objectReference: {fileID: 7198309724950766959}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: ShootPowerupHud
+      value: 
+      objectReference: {fileID: 2453029876891148652}
+    - target: {fileID: 5874167815147593349, guid: 80c09484583b57243a800f4780928896, type: 3}
+      propertyPath: SpeedPowerupHud
+      value: 
+      objectReference: {fileID: 2453029876891148654}
     - target: {fileID: 8293804948225514341, guid: 80c09484583b57243a800f4780928896, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1760,6 +1788,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1115643239721033800, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
   m_PrefabInstance: {fileID: 2453029876891148638}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2453029876891148650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6560387176982809325, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
+  m_PrefabInstance: {fileID: 2453029876891148638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2453029876891148651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6927827059998831258, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
+  m_PrefabInstance: {fileID: 2453029876891148638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2453029876891148652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8596112779078122934, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
+  m_PrefabInstance: {fileID: 2453029876891148638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2453029876891148653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2036617257821898932, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
+  m_PrefabInstance: {fileID: 2453029876891148638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2453029876891148654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4302162148787353612, guid: 2df51fec7e6ff86499117f659181e48c, type: 3}
+  m_PrefabInstance: {fileID: 2453029876891148638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5610805142255690267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2017,6 +2070,10 @@ PrefabInstance:
     - target: {fileID: 7198309723239032476, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198309723239032479, guid: ee25794f8704ca1458597866732bd4c5, type: 3}
+      propertyPath: Speed
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee25794f8704ca1458597866732bd4c5, type: 3}

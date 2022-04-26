@@ -231,7 +231,6 @@ public class GameManager : MonoBehaviour
         {
             if (playerOneScore >= maxScore)
             {
-                // TODO: Mostrar opciones para pasar al siguiente nivel, seleccionar nivel o ir al menú principal
                 levelPassed = true;
             }
             else if (playerTwoScore >= maxScore)

@@ -45,7 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   PlayerAnimation: {fileID: 0}
-  speedAmount: 15
+  SpeedPowerupHud: {fileID: 0}
+  GrowPowerupHud: {fileID: 0}
+  ShootPowerupHud: {fileID: 0}
+  speedAmount: 35
   speedTimeLimit: 2.5
   SpeedParticle: {fileID: 0}
   scaleTime: 0.5

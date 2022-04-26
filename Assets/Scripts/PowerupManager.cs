@@ -8,11 +8,15 @@ public class PowerupManager : MonoBehaviour
 
     [SerializeField] PlayerController Player;
     [SerializeField] GameObject PlayerAnimation;
+
+    [SerializeField] GameObject SpeedPowerupHud;
+    [SerializeField] GameObject GrowPowerupHud;
+    [SerializeField] GameObject ShootPowerupHud;
     
     [Header("Speed Powerup")]
-    [SerializeField] float speedAmount = 3f;
+    [SerializeField] float speedAmount = 35f;
     [SerializeField] float speedTimeLimit = 2.5f;
-    [SerializeField] ParticleSystem SpeedParticle;
+    [SerializeField] ParticleSystem speedParticle;
 
     [Header("Grow Powerup")]
     [SerializeField] [Tooltip("Grow time in seconds")] float scaleTime = 1f;
@@ -55,13 +59,15 @@ public class PowerupManager : MonoBehaviour
     }
 
     // Speed powerup
+    [ContextMenu("SpeedPowerup")]
     public void SpeedPowerup()
     {
         if (!hasPowerup.ContainsKey("speed"))
         {
-            Player.Speed += speedAmount;
-            SpeedParticle.Play();
             hasPowerup.Add("speed", true);
+            Player.Speed += speedAmount;
+            speedParticle.Play();
+            SpeedPowerupHud.SetActive(true);
             StartCoroutine(RemoveSpeedPowerup());
         }
     }
@@ -70,17 +76,20 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(speedTimeLimit);
         Player.Speed -= speedAmount;
-        SpeedParticle.Stop();
+        speedParticle.Stop();
+        SpeedPowerupHud.SetActive(false);
         hasPowerup.Remove("speed");
     }
 
     // Grow powerup
+    [ContextMenu("GrowPowerup")]
     public void GrowPowerup()
     {
         if (!hasPowerup.ContainsKey("grow"))
         {
             hasPowerup.Add("grow", true);
             StartCoroutine(ChangeScale(Player.gameObject, playerInitialScale, targetScale, scaleTime));
+            GrowPowerupHud.SetActive(true);
             StartCoroutine(RemoveGrowPowerup());
         }
     }
@@ -89,15 +98,18 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(scaleTimeLimit);
         StartCoroutine(ChangeScale(Player.gameObject, targetScale, playerInitialScale, scaleTime));
+        GrowPowerupHud.SetActive(false);
         hasPowerup.Remove("grow");
     }
 
     // Shoot powerup
+    [ContextMenu("ShootPowerup")]
     public void ShootPowerup()
     {
         if (!hasPowerup.ContainsKey("shoot"))
         {
             hasPowerup.Add("shoot", true);
+            ShootPowerupHud.SetActive(true);
         }
         if (hasPowerup.ContainsKey("shoot"))
         {
@@ -121,6 +133,7 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(shootTimeLimit);
         AlternativePlayerController.shootPowerup = false;
+        ShootPowerupHud.SetActive(false);
         if (hasPowerup.ContainsKey("shoot"))
         {
             hasPowerup.Remove("shoot");

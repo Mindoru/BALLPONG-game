@@ -73,6 +73,10 @@ public class UIManager : MonoBehaviour
         CheckResolution();
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public void NextScene()
     {

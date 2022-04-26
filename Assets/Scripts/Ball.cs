@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
     [SerializeField] float Speed = 3f;
     [SerializeField] float SpeedMultiplier = 1.05f;
     [SerializeField] ParticleSystem BurstParticle;
+    float xBound = 15f;
     
     [HideInInspector]
     public bool isBallMoving;
@@ -29,12 +30,27 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        HandleBounds();
         if (GameManager.Instance.isGameActive && !IsBallMoving())
         {        
             if (Input.GetKeyDown(KeyCode.V))
             {
                 PushBall();
             }
+        }
+    }
+
+    void HandleBounds()
+    {
+        if (transform.position.x > xBound)
+        {
+            GameManager.Instance.AddScore("playerOne", 1);
+            GameManager.Instance.ResetPosition();
+        }
+        else if (transform.position.x < -xBound)
+        {
+            GameManager.Instance.AddScore("playerTwo", 1);
+            GameManager.Instance.ResetPosition();
         }
     }
 
@@ -49,9 +65,9 @@ public class Ball : MonoBehaviour
 
     public void StopBall()
     {
+        BurstParticle.Stop();
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
-        BurstParticle.Stop();
     }
 
     public bool IsBallMoving()
