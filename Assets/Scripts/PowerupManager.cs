@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PowerupManager : MonoBehaviour
 {
@@ -8,26 +9,31 @@ public class PowerupManager : MonoBehaviour
 
     [SerializeField] PlayerController Player;
     [SerializeField] GameObject PlayerAnimation;
-
-    [SerializeField] GameObject SpeedPowerupHud;
-    [SerializeField] GameObject GrowPowerupHud;
-    [SerializeField] GameObject ShootPowerupHud;
     
     [Header("Speed Powerup")]
     [SerializeField] float speedAmount = 35f;
     [SerializeField] float speedTimeLimit = 2.5f;
+    [SerializeField] GameObject speedPowerupHud;
+    Timer speedTimerScript;
+    [SerializeField] TextMeshProUGUI speedTimerText;
     [SerializeField] ParticleSystem speedParticle;
 
     [Header("Grow Powerup")]
     [SerializeField] [Tooltip("Grow time in seconds")] float scaleTime = 1f;
     [SerializeField] float scaleAmount = 0.35f;
     [SerializeField] float scaleTimeLimit = 4f;
+    [SerializeField] GameObject growPowerupHud;
+    Timer growTimerScript;
+    [SerializeField] TextMeshProUGUI growTimerText;
     Vector2 playerInitialScale;
     Vector2 targetScale;
 
     [Header("Shoot Powerup")]
     [SerializeField] float shootRate = 2f;
     [SerializeField] [Range(3, 10)] float shootTimeLimit = 3f;
+    [SerializeField] GameObject shootPowerupHud;
+    Timer shootTimerScript;
+    [SerializeField] TextMeshProUGUI shootTimerText;
 
     [Header("Shoot Pooling")]
     [SerializeField] GameObject bulletPrefab;
@@ -56,6 +62,10 @@ public class PowerupManager : MonoBehaviour
         {
             SimplePool.Preload(bulletPrefab, bulletPoolSize);
         }
+
+        speedTimerScript = speedPowerupHud.GetComponent<Timer>();
+        growTimerScript = growPowerupHud.GetComponent<Timer>();
+        shootTimerScript = shootPowerupHud.GetComponent<Timer>();
     }
 
     // Speed powerup
@@ -67,7 +77,8 @@ public class PowerupManager : MonoBehaviour
             hasPowerup.Add("speed", true);
             Player.Speed += speedAmount;
             speedParticle.Play();
-            SpeedPowerupHud.SetActive(true);
+            speedPowerupHud.SetActive(true);
+            speedTimerScript.Countdown(speedTimerText, speedTimeLimit);
             StartCoroutine(RemoveSpeedPowerup());
         }
     }
@@ -77,7 +88,7 @@ public class PowerupManager : MonoBehaviour
         yield return new WaitForSeconds(speedTimeLimit);
         Player.Speed -= speedAmount;
         speedParticle.Stop();
-        SpeedPowerupHud.SetActive(false);
+        speedPowerupHud.SetActive(false);
         hasPowerup.Remove("speed");
     }
 
@@ -89,7 +100,8 @@ public class PowerupManager : MonoBehaviour
         {
             hasPowerup.Add("grow", true);
             StartCoroutine(ChangeScale(Player.gameObject, playerInitialScale, targetScale, scaleTime));
-            GrowPowerupHud.SetActive(true);
+            growPowerupHud.SetActive(true);
+            growTimerScript.Countdown(growTimerText, scaleTimeLimit);
             StartCoroutine(RemoveGrowPowerup());
         }
     }
@@ -98,7 +110,7 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(scaleTimeLimit);
         StartCoroutine(ChangeScale(Player.gameObject, targetScale, playerInitialScale, scaleTime));
-        GrowPowerupHud.SetActive(false);
+        growPowerupHud.SetActive(false);
         hasPowerup.Remove("grow");
     }
 
@@ -109,7 +121,8 @@ public class PowerupManager : MonoBehaviour
         if (!hasPowerup.ContainsKey("shoot"))
         {
             hasPowerup.Add("shoot", true);
-            ShootPowerupHud.SetActive(true);
+            shootPowerupHud.SetActive(true);
+            shootTimerScript.Countdown(shootTimerText, shootTimeLimit);
         }
         if (hasPowerup.ContainsKey("shoot"))
         {
@@ -133,7 +146,7 @@ public class PowerupManager : MonoBehaviour
     {
         yield return new WaitForSeconds(shootTimeLimit);
         AlternativePlayerController.shootPowerup = false;
-        ShootPowerupHud.SetActive(false);
+        shootPowerupHud.SetActive(false);
         if (hasPowerup.ContainsKey("shoot"))
         {
             hasPowerup.Remove("shoot");
