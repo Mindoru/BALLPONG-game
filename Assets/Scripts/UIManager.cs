@@ -11,6 +11,9 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    // Score GUI
+    [SerializeField] TextMeshProUGUI matchPointText;
+
     // Variables para el control de volumen
     [Header("Volume settings")]
     [SerializeField] Slider volumeSlider;
@@ -31,10 +34,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] Toggle fullScreenToggle;
     [SerializeField] TMP_Dropdown resolutionsDropdown;
     [Space(20)]
-    Resolution[] resolutions;
+    List<Resolution> validResolutions;
 
     void Start()
     {
+        if (matchPointText != null)
+        {
+            matchPointText.text = $"Match Point: {GameManager.Instance.maxScore.ToString()}";
+        }
+
         // Volume settings
         InitialVolume();
 
@@ -84,6 +92,11 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void ExitGame()
     {
         #if UNITY_EDITOR
@@ -119,37 +132,47 @@ public class UIManager : MonoBehaviour
 
     public void CheckResolution()
     {
-        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
         resolutionsDropdown.ClearOptions();
+        Resolution[] resolutions = Screen.resolutions;
+        validResolutions = Screen.resolutions.ToList();
         List<string> options = new List<string>();
         int currentResolution = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            float aspectRatio = (float)resolutions[i].width / (float)resolutions[i].height;
-            if (aspectRatio < 1.7) continue; // allow 16/9 only
+            Resolution loopedResolution = resolutions[i];
 
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            float aspectRatio = (float)loopedResolution.width / (float)loopedResolution.height;
+            float targetRatio = 16.0f / 9.0f;
+            if (aspectRatio / targetRatio >= 1.0f && (loopedResolution.refreshRate >= 50) && !validResolutions.Contains(loopedResolution)) // allow 16/9 50Hz+ only
+            {
+                validResolutions.Add(loopedResolution);
+            }
+        }
+
+        for (int i = 0; i < validResolutions.Count; i++)
+        {
+            Resolution validResolution = validResolutions[i];
+            string option = string.Format("{0}x{1} @{2}Hz", validResolution.width, validResolution.height, validResolution.refreshRate);
             options.Add(option);
 
-            if (Screen.fullScreen && resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            bool isCurrentResolution = validResolution.width == Screen.currentResolution.width && validResolution.height == Screen.currentResolution.height && validResolution.refreshRate == Screen.currentResolution.refreshRate;
+            if (isCurrentResolution)
             {
                 currentResolution = i;
             }
         }
 
+        int resolutionPrefs = PlayerPrefs.GetInt("resolution", currentResolution);
         resolutionsDropdown.AddOptions(options);
-        resolutionsDropdown.value = currentResolution;
+        resolutionsDropdown.value = resolutionPrefs;
         resolutionsDropdown.RefreshShownValue();
-
-        resolutionsDropdown.value = PlayerPrefs.GetInt("resolution", 0);
     }
 
     public void ChangeResolution(int index)
     {
-        PlayerPrefs.SetInt("resolution", resolutionsDropdown.value);
-
-        Resolution resolution = resolutions[index];
+        Resolution resolution = validResolutions[index];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        PlayerPrefs.SetInt("resolution", resolutionsDropdown.value);
     }
 }

@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public bool isGameActive = true;
     public bool enemyIncoming;
     public bool isPositionReset;
+    bool restartWithKey = false;
 
     void Awake()
     {
@@ -82,6 +83,15 @@ public class GameManager : MonoBehaviour
     {
         CheckScore();
         ToggleMenu();
+
+        if (restartWithKey)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                RestartGame();
+                restartWithKey = false;
+            }
+        }
     }
 
     void SetScoreTextToScore()
@@ -249,6 +259,7 @@ public class GameManager : MonoBehaviour
             EnemyIncomingUI.SetActive(false);
         }
         gameOverUI.SetActive(true);
+        restartWithKey = true;
     }
 
     public void UseSound(string name)
